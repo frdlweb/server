@@ -17,19 +17,19 @@ permalink: /404.html
 	 .replace(/(404\.html\/)/, '')
 	 .replace(/(\/\/index\.php)/, '/index.php'); 
  var c = await fetch(backendUrl
-        + '/web+proxy,web+state,web+fan,web+404/' + window.location.pathname
+        + '/1.3.6.1.4.1.37553.8.2.25.36095/' + window.location.pathname
 	+ window.location.search
         + window.location.search === ''
             ? '?'
             : '&'
-        + 'REQUEST_URI='+encodeURIComponent(window.location.pathname + window.location.search)           
+        + 'REQUEST_URI='+encodeURIComponent(window.location.pathname + window.location.search+window.location.hash)           
         + '&hashbang='+encodeURIComponent(window.location.hash)
 		    +'&cache-bust='+(new Date()).getFullYear()+'/'+((new Date()).getMonth()+1)+'/'+((new Date()).getUTCDate())
 		, {
 		method: 'GET',
 		headers: {
-			'X-Frdlweb-IO4-Route': '404.fallback.404.html.fallback.async.bounce',
-			'X-RapidAPI-Host': 'famous-quotes4.p.rapidapi.com',
+			'X-Frdlweb-Route': '404@fallback.404.html.fallback.async.bounce',
+			'X-Frdlweb-Operation': '1.3.6.1.4.1.37553.8.2.25.36095',
 		},
 	}
    );
