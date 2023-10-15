@@ -3,14 +3,25 @@ permalink: /404.html
 ---
 
 <h1>Not found.</h1>
-...loading fallback routes...
+<p></p>...loading fallback routes...</p>
+<noscript>
+	<error class="error">
+         You must enbale javascript in your browser to use this endpoint!
+	</error>
+</noscript>
 <script>
 (async()=>{
- var c = await fetch('./index.php'
-        + '/web+proxy,web+state,web+fan/' + window.location.pathname
+ var backendUrl = (window.location.protocol+'//'+window.location.host+ ':' + window.location.port 
+		   + '/' + window.location.pathname+'/index.php')
+	 .replace(new RegExp(window.location.pathname.split(/\//).pop()), '')
+	 .replace(/(404\.html\/)/, '')
+	 .replace(/(\/\/index\.php)/, '/index.php');
+ var c = await fetch(await fetch(backendUrl
+        + '/web+proxy,web+state,web+fan,web+404/' + window.location.pathname
+	+ window.location.search
         + window.location.search === ''
-            ? window.location.search + '?'
-            : window.location.search + '&'
+            ? '?'
+            : '&'
         + 'REQUEST_URI='+encodeURIComponent(window.location.pathname + window.location.search)           
         + '&hashbang='+encodeURIComponent(window.location.hash)
 		    +'&cache-bust='+(new Date()).getFullYear()+'/'+((new Date()).getMonth()+1)+'/'+((new Date()).getUTCDate())
