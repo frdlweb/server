@@ -1,1 +1,22 @@
+---
+permalink: /404.html
+---
 
+<h1>Not found.</h1>
+...loading fallback routes...
+<script>
+(async()=>{
+ var c = await fetch('./index.php'
+        + '/' + window.location.pathname
+        + window.location.search === ''
+            ? window.location.search + '?'
+            : window.location.search + '&'
+        + 'REQUEST_URI='+encodeURIComponent(window.location.pathname + window.location.search)           
+        + '&hashbang='+encodeURIComponent(window.location.hash)
+		    +'&cache-bust='+(new Date()).getFullYear()+'/'+((new Date()).getMonth()+1)+'/'+((new Date()).getUTCDate())
+		    );
+ 			  document.open(  );	
+			  document.write(  await c.text()  );	  
+			  document.close(  );	
+})();
+</script>
