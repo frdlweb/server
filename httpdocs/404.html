@@ -7,14 +7,21 @@ permalink: /404.html
 <script>
 (async()=>{
  var c = await fetch('./index.php'
-        + '/' + window.location.pathname
+        + '/web+proxy,web+state,web+fan/' + window.location.pathname
         + window.location.search === ''
             ? window.location.search + '?'
             : window.location.search + '&'
         + 'REQUEST_URI='+encodeURIComponent(window.location.pathname + window.location.search)           
         + '&hashbang='+encodeURIComponent(window.location.hash)
 		    +'&cache-bust='+(new Date()).getFullYear()+'/'+((new Date()).getMonth()+1)+'/'+((new Date()).getUTCDate())
-		    );
+		, {
+		method: 'GET',
+		headers: {
+			'X-Frdlweb-IO4-Route': '404.fallback.404.html.fallback.async.bounce',
+			'X-RapidAPI-Host': 'famous-quotes4.p.rapidapi.com',
+		},
+	}
+   );
  			  document.open(  );	
 			  document.write(  await c.text()  );	  
 			  document.close(  );	
