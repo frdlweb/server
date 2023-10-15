@@ -15,7 +15,7 @@ permalink: /404.html
 		   + '/' + window.location.pathname.replace(new RegExp(window.location.pathname.split(/\//).pop()), '')+'/index.php')
 	 
 	 .replace(/(404\.html\/)/, '')
-	 .replace(/(\/\/index\.php)/, '/index.php');console.log(backendUrl);return;
+	 .replace(/(\/\/index\.php)/, '/index.php'); 
  var c = await fetch(backendUrl
         + '/web+proxy,web+state,web+fan,web+404/' + window.location.pathname
 	+ window.location.search
