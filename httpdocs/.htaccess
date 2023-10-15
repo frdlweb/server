@@ -2,90 +2,14 @@ RewriteEngine On
 
 RewriteCond %{HTTP:Authorization} ^(.*)
 RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+ 
+# FallbackResource /index.php
+FallbackResource index.php
 
-#ErrorDocument 404 /proxy.404.php
-
-RewriteRule ^.*\.(restore|backup)\$ - [F,L,NC]
-
-#RewriteCond %{REQUEST_URI} ^\/login(.*)
-#RewriteRule ^(.*)$ /apps/index.php [L]
-
-#RewriteCond %{REQUEST_URI} ^\/index\.php(.*)
-#RewriteRule ^(.*)$ /apps/index.php [L]
-
-#RewriteCond %{REQUEST_URI} ^\/public\.php(.*)
-#RewriteRule ^(.*)$ /apps/index.php [L]
-
-
-#RewriteCond %{REQUEST_URI} ^\/core\/(.*)
-#RewriteRule ^(.*)$ /apps/index.php [L]
-
-#RewriteCond %{REQUEST_URI} ^\/account\/(.*)
-#RewriteRule ^(.*)$ /apps/index.php [L]
-
-
- # RewriteCond %{HTTP_USER_AGENT} DavClnt
- # RewriteRule ^\/webdav\$ /remote.php/webdav/ [L,R=302]
- # RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
- # RewriteRule ^\.well-known/host-meta /public.php?service=host-meta [QSA,L]
- # RewriteRule ^\.well-known/host-meta\.json /public.php?service=host-meta-json [QSA,L]
- # RewriteRule ^\.well-known/webfinger /public.php?service=webfinger [QSA,L]
- # RewriteRule ^\.well-known/nodeinfo /public.php?service=nodeinfo [QSA,L]
- # RewriteRule ^\.well-known/carddav /remote.php/dav/ [R=301,L]
-  #RewriteRule ^\.well-known/caldav /remote.php/dav/ [R=301,L]
- # RewriteRule ^remote/(.*) /apps/index.php [QSA,L]
-  
-  
-
-    <FilesMatch "\.(jpg|jpeg|png|gif|js|css|swf|html|xml|json|ico|bmp|svg|zip|wgt)$">
-       Header set Access-Control-Allow-Origin "*"
-       Header set Access-Control-Allow-Methods: "GET"
-	   Header set Access-Control-Allow-Headers: "X-Requested-With"
-    </FilesMatch>
-	
-#<Files "proxy.html">
-#  Header set Access-Control-Allow-Origin "*"
- # Header set Access-Control-Allow-Methods: "GET"
-#</Files>
-#<Files "iframe.html">
-#  Header set Access-Control-Allow-Origin "*"
-#  Header set Access-Control-Allow-Methods: "GET"
-#</Files>
-#<If "%{REQUEST_URI} =~ m#^/cdn/.*#">
-#  Header set Access-Control-Allow-Origin "*"
-#  Header set Access-Control-Allow-Methods: "GET"
-#</If>
-
-<IfModule mod_headers.c>
-     # WEEK
-    <FilesMatch "\.(jpg|jpeg|png|gif|js|css|swf)$">
-        Header set Cache-Control "max-age=604800, public"
-		Header set X-UA-Compatible "IE=edge"
-    </FilesMatch>
-	
-	Header set X-UA-Compatible "IE=edge"
-</IfModule>
-
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresDefault "access plus 1 week"
-
-    ExpiresByType image/jpg "access plus 1 week"
-    ExpiresByType image/jpeg "access plus 1 week"
-    ExpiresByType image/png "access plus 1 week"
-    ExpiresByType application/javascript "access plus 1 week"
-    ExpiresByType text/javascript "access plus 1 week"
-    ExpiresByType text/css "access plus 1 week"
-   
-</IfModule>
-
-RewriteCond %{SCRIPT_FILENAME} -f 
-RewriteRule ^(.*)$ %{SCRIPT_FILENAME} [L]
+ErrorDocument 403 index.php
+ErrorDocument 404 index.php
+ErrorDocument 500 index.php
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-RewriteRule ^.*\.(jpg|jpeg|png|gif|js|css|swf)\$ - [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:If-Modified-Since}]
-RewriteRule ^.*\.(jpg|jpeg|png|gif|js|css|swf)\$ - [E=HTTP_IF_NONE_MATCH:%{HTTP:If-None-Match}]
-
-RewriteRule ^(.*)$ index.php [L]
+RewriteRule . index.php [PT,E=PATH_INFO:$1]
