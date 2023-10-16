@@ -1,15 +1,13 @@
 {
-	"name": "frdlweb/server",
-	"description": "Root-Project for a server/webspace/vhost with backend, shares, and subprojects.",
-  "type" : "project",
+   "name": "frdlweb/server",
+  "description": "Root-Project for a server/webspace/vhost with backend, shares, and subprojects.",
+  "keywords": ["webfan", "webspace", "server", "subscription", "vhost", "root", "php"],
+  "type" : "webfan-server",
   "license": ["MIT"],	  
   "homepage": "https://frdlweb.de",	
   "repositories": [	
-    {"type": "composer", "url": "https://webfat.repo.pkg.frdl.de"},	
-    {"type": "composer", "url": "https://frdl.repo.pkg.frdl.de"},	
-    {"type": "composer", "url": "https://oidplus-plugins.repo.pkg.frdl.de"},	 
-    {"type": "composer", "url": "https://weid.repo.pkg.frdl.de"},
-    {"type": "composer", "url": "https://repo.pkg.frdl.de"}
+       {"type": "composer", "url": "https://repo.pkg.frdl.de"},
+       {"packagist": false}
   ],
  "authors": [{
 		"name": "Till Wehowski",
@@ -18,166 +16,39 @@
   }],
   "require" : {	
     "php": ">=7.0 || >=8.0",	
-    "frdlweb/frdlweb-composer-plugin": "*",
-    "laminas/laminas-component-installer": "*",
-    "frdl/oiplus-composer-plugin" : "*",	       
-    "comcast/php-legal-licenses": "*"
+    "frdlweb/frdlweb-composer-plugin": "*"
   },
   "require-dev": {
      	"roave/security-advisories": "dev-latest",
     	"yosymfony/resource-watcher": "*"
   },	
-"minimum-stability": "dev",
-"extra": { 
-	 "compile-mode" : "all",
-     "merge-plugin": {        			
-			"include": [
-				"plugins/*/*/*/composer.json",
-				"composer.json"
-			],
-			"require": [			
-				"composer.json"
-			],
-			"recurse": true,
-			"replace": false,
-			"ignore-duplicates": false,
-			"merge-dev": true,
-			"merge-extra": true,
-			"merge-extra-deep": true,
-			"merge-scripts": true
-    },
-		
-		"installer-types": [ 
-			"oiplus-plugin-public-pages",
-			"oiplus-plugin-rap-ages",
-			"oiplus-plugin-admin-pages",
-			"oiplus-plugin-auth",
-			"oiplus-plugin-database",
-			"oiplus-plugin-sql-slang",
-			"oiplus-plugin-logger",
-			"oiplus-plugin-object-types",
-			"oiplus-plugin-language",
-			"oiplus-plugin-design",
-			"oiplus-plugin-captcha",
-			"project",
-			"library"
-		],
- "installer-paths": {
-			"~/.frdl/shared/{$type}s/{$vendor}/{$name}/": [
-        "type:project"
-			],
-			"vendor/{$vendor}/{$name}/":             [
-				"type:library"
-			],
-   
-			"plugins/{$vendor}/publicPages/{$name}/":              [
-				"type:oiplus-plugin-public-pages"
-			],
-			"plugins/{$vendor}/raPages/{$name}/": [
-				"type:oiplus-plugin-ra-pages"
-			],
-			"plugins/{$vendor}/adminPages/{$name}/":             [
-				"type:oiplus-plugin-admin-pages"
-			],
-			"plugins/{$vendor}/auth/{$name}/": [
-				"type:oiplus-plugin-auth"
-			],
-			"plugins/{$vendor}/database/{$name}/": [
-				"type:oiplus-plugin-database"
-			],
-			"plugins/{$vendor}/sqlSlang/{$name}/": [
-				"type:oiplus-plugin-sql-slang"
-			],
-			"plugins/{$vendor}/logger/{$name}/": [
-				"type:oiplus-plugin-logger"
-			],
-			"plugins/{$vendor}/objectTypes/{$name}/": [
-				"type:oiplus-plugin-object-types"
-			],
-			"plugins/{$vendor}/language/{$name}/": [
-				"type:oiplus-plugin-language"
-			],
-			"plugins/{$vendor}/design/{$name}/": [
-				"type:oiplus-plugin-design"
-			],
-			"plugins/{$vendor}/captcha/{$name}/": [
-				"type:oiplus-plugin-captcha"
-			]
-		},
-
-		"dependency-scripts": {
-			"run": true,
-			"trust": [
-				"danielmarschall\/*",
-				"airmad\/*",
-				"composer\/*",
-				"symfony\/*",
-				"frdl\/*",
-				"webfan3\/*",
-				"wehowski\/*",
-				"vendor-patch\/*",
-				"smoren\/mushroom-hook-manager",
-				"oomphinc\/composer-installers-extender",
-        "laminas\/*"
-			],
-			"exclude": [],
-			"types": [ 
-			"oiplus-plugin-public-pages",
-			"oiplus-plugin-rap-ages",
-			"oiplus-plugin-admin-pages",
-			"oiplus-plugin-auth",
-			"oiplus-plugin-database",
-			"oiplus-plugin-sql-slang",
-			"oiplus-plugin-logger",
-			"oiplus-plugin-object-types",
-			"oiplus-plugin-language",
-			"oiplus-plugin-design",
-			"oiplus-plugin-captcha",
-			"project",
-			"library"
-			]
-		}
-  }, 
-  "config": {	  
-	"optimize-autoloader" : true,
-	"classmap-authoritative" : false,  
-	"prepend-autoloader": true, 
-	"cache-files-ttl": 120,
-	"secure-http": false,
-	"preferred-install": "auto",
-	"autoloader-suffix": "OidPlusComposer", 
-	"allow-plugins": {
-		"danielmarschall/*": true,
-		"airmad/*": true,
-		"civicrm/*": true,
-		"composer/*": true,
-		"frdl/*": true,
-		"kylekatarnls/update-helper": true,
-		"vendor-patch/composer-custom-directory-installer": true,
-		"vendor-patch/composer-installers-extender": true,
-		"frdl/oiplus-composer-plugin": true,
-		"smoren/mushroom-hook-manager": true,
-		"composer/installers": true,
-		"oomphinc/composer-installers-extender": true,
-    "laminas/*" : true
-	}
-
-  },
-	"scripts": {
-		"UNCOMMENT_IF_pre-install-cmd": [
-			"-d memory_limit=-1 composer self-update --2"
-		],
-		"post-root-package-install": [
-			"php-legal-licenses generate --hide-version"
-		],
-		"post-create-project-cmd": [
-			"php-legal-licenses generate --hide-version"
-		],
-		"post-install-cmd": [
-			"php-legal-licenses generate --hide-version"
-		],
-		"post-update-cmd": [
-			"php-legal-licenses generate --hide-version"
-		]
-	}
+   "minimum-stability": "dev",
+   "extra": { 
+     "io4" : {   
+	 "auto-install-packages" : {
+             "frdlweb/webfat" : false
+	 }
+     },
+    "webfan" : {  
+	"registration" : {
+              "installed" : false
+	},
+	"api" : {
+               "installed" : false
+	},
+       "webfat" : {
+	  "FRDL_BUILD_FLAVOR" : "1.3.6.1.4.1.37553.8.1.8.1.575874",
+          "1.3.6.1.4.1.37553.8.1.8.1.1089085" : {
+              "description" : "Webmaster FRDL_BUILD_FLAVOR",
+	      "enabled" : true,
+	      "modules" : []
+	  },
+          "1.3.6.1.4.1.37553.8.1.8.1.575874" : {
+              "description" : "Developer FRDL_BUILD_FLAVOR",
+	      "enabled" : true,
+	      "modules" : []
+	  }
+       }
+   }
+  }
 }
