@@ -1,13 +1,12 @@
 {
    "name": "frdlweb/server",
   "description": "Root-Project for a server/webspace/vhost with backend, shares, and subprojects.",
-  "keywords": ["webfan", "webspace", "server", "subscription", "vhost", "root", "php"],
+  "keywords": ["@www@root", "root-project", "webfan", "webspace", "server", "subscription", "vhost", "root", "php"],
   "type" : "webfan-server",
   "license": ["MIT"],	  
   "homepage": "https://frdlweb.de",	
   "repositories": [	
-       {"type": "composer", "url": "https://repo.pkg.frdl.de"},
-       {"packagist": false}
+       {"type": "composer", "url": "https://repo.pkg.frdl.de"}
   ],
  "authors": [{
 		"name": "Till Wehowski",
@@ -16,11 +15,14 @@
   }],
   "require" : {	
     "php": ">=7.0 || >=8.0",	
-    "frdlweb/frdlweb-composer-plugin": "*"
+    "frdlweb/frdlweb-composer-plugin": "*",
+    "frdl/remote-psr4" : "*",
+    "hellogerard/jobby" : "*",
+    "frdl/composer-adapter" : "dev-master",
+     "yosymfony/resource-watcher": "*"
   },
   "require-dev": {
-     	"roave/security-advisories": "dev-latest",
-    	"yosymfony/resource-watcher": "*"
+     	"roave/security-advisories": "dev-latest"
   },	
    "minimum-stability": "dev",
    "extra": { 
@@ -29,7 +31,7 @@
 	     "frdl/1.3.6.1.4.1.37553.8.2.49363662052.3.1276945-io4-rdap" : true,
              "frdlweb/webfat" : {
                 "allow" : true,
-	        "scope" : "@cwd"
+	        "scope" : "@www@parent"
 	     }
 	 },
 	 "auto-install-packages" : {
@@ -42,7 +44,7 @@
 			     }, 			  
 			     "tenancy" : {             
 				     "allow" : true,	      
-				     "scope" : "@cwd"	  
+				     "scope" : "@www@parent"	  
 			     },			  
 			     "1.3.6.1.4.1.37553.8.1.8.1.1089085" : {             
 				     "allow" : true,	       
@@ -64,7 +66,6 @@
                "installed" : false
 	},
        "webfat" : {
-	  "scope" : "@www@root",
 	  "FRDL_BUILD_FLAVOR" : "1.3.6.1.4.1.37553.8.1.8.1.575874",
           "1.3.6.1.4.1.37553.8.1.8.1.1089085" : {
               "description" : "Webmaster FRDL_BUILD_FLAVOR",
